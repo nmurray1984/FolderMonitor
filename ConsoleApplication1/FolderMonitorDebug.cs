@@ -45,7 +45,7 @@ namespace ConsoleApplication1
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void Observe()
         {
-            
+
             // Begin watching.
             Watcher.EnableRaisingEvents = true;
         }
@@ -54,7 +54,7 @@ namespace ConsoleApplication1
         {
             Running = true;
             StorageProvider.CreateBlob(FolderName, e.Name);
-            
+
         }
     }
 }

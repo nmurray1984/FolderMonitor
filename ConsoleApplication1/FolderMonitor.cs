@@ -25,7 +25,7 @@ namespace ConsoleApplication1
         public void Initialize(string folderName, IStorageProvider storageProvider)
         {
             FolderName = folderName;
-            StorageProvider =  storageProvider;
+            StorageProvider = storageProvider;
 
             //Create a new FileSystemWatcher and set its properties.
             Watcher = new FileSystemWatcher();
@@ -51,11 +51,11 @@ namespace ConsoleApplication1
 
         //create a blob of the file added to the folder we are watching in azure
         public void OnChanged(object source, FileSystemEventArgs e)
-        { 
+        {
             StorageProvider.CreateBlob(FolderName, e.Name);
         }
-       
-        
+
+
 
     }
 }

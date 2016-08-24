@@ -11,6 +11,7 @@ namespace ConsoleApplication1
 {
     public interface IStorageProvider
     {
+        //unsure if interface should include the properties
         //CloudStorageAccount StorageAccount { get; set; }
         //CloudBlobClient BlobClient { get; set; }
         //CloudBlobContainer BlobContainer { get; set; }

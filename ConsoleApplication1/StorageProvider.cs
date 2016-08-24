@@ -38,8 +38,8 @@ namespace ConsoleApplication1
             string fullFilePath = System.IO.Path.Combine(filePath, fileName);
             BlockBlob = BlobContainer.GetBlockBlobReference(fileName);
 
-            
-            if(!FileExists(fileName))
+
+            if (!FileExists(fileName))
             {
                 using (var fileStream = System.IO.File.OpenRead(fullFilePath))
                 {
@@ -60,7 +60,7 @@ namespace ConsoleApplication1
 
         public void DeleteBlob(string fileName)
         {
-            if (FileExists(fileName)) 
+            if (FileExists(fileName))
             {
                 BlockBlob = BlobContainer.GetBlockBlobReference(fileName);
                 BlockBlob.Delete();
@@ -69,7 +69,7 @@ namespace ConsoleApplication1
             {
                 //file dne
             }
-            
+
 
         }
 

@@ -15,6 +15,8 @@ namespace ConsoleApplication1
         CloudBlobClient BlobClient { get; set; }
         CloudBlobContainer BlobContainer { get; set; }
         CloudBlockBlob BlockBlob { get; set; }
+        
+
         public bool DeleteFailed { get; set; }
         public bool AddBlobFailed { get; set; }
 
@@ -34,19 +36,19 @@ namespace ConsoleApplication1
         }
         public void CreateBlob(string filepath, string filename)
         {
-            Console.WriteLine("CreateBlob(string "+ filepath+", string "+filename+")");
+            Console.WriteLine("CreateBlob(string " + filepath + ", string " + filename + ")");
         }
         public void PrintBlobFolder()
         {
             Console.WriteLine("PrintBlobFolder()");
         }
-        public void DeleteBlob() 
+        public void DeleteBlob()
         {
-           
+
             DeleteBlob(BlockBlob.Name);
-            
+
         }
-        public void DeleteBlob(string fileName) 
+        public void DeleteBlob(string fileName)
         {
             if (FileExists(fileName))
             {
@@ -57,7 +59,7 @@ namespace ConsoleApplication1
             {
                 DeleteFailed = true;
             }
-            
+
         }
         public bool FileExists(string fileName)
         {

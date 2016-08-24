@@ -15,7 +15,7 @@ namespace FileWatcherTest
         public string filePath = "C://Users//dylan.parmley//Desktop//FindThis";
 
         [TestMethod]
-        public void PDFfound()
+        public void WatcherFindsPDF()
         {
 
             FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
@@ -28,7 +28,7 @@ namespace FileWatcherTest
 
         }
         [TestMethod]
-        public void textFileIgnored()
+        public void WatcherIgnoresTxt()
         {
             FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
             folderMonitor.Observe();
@@ -40,7 +40,7 @@ namespace FileWatcherTest
         }
 
         [TestMethod]
-        public void BlobCreated()
+        public void StorageProvider_CreateBlob_CreatesBlob()
         {
 
             StorageProvider storageProvider = new StorageProvider();
@@ -69,7 +69,7 @@ namespace FileWatcherTest
 
         //verify file size matches
         [TestMethod]
-        public void contentMatches()
+        public void StorageProvider_CreateBlob_BlobContentMatchesPDFContent()
         {
             StorageProvider storageProvider = new StorageProvider();
 
@@ -80,8 +80,8 @@ namespace FileWatcherTest
             DirectoryInfo directory = new DirectoryInfo(filePath);
 
             //ensure there is no file that already exists in cloud with the same name
-           
-           storageProvider.DeleteBlob("contentMatches");
+
+            storageProvider.DeleteBlob("contentMatches");
 
             storageProvider.CreateBlob(filePath, fileName);
 
@@ -97,7 +97,7 @@ namespace FileWatcherTest
         [ExpectedException(typeof(System.IO.FileNotFoundException),
             "Parameter index is out of range.")]
         [TestMethod]
-        public void BlobCreation_FileNotFoundCatchesException()
+        public void StorageProvider_BlobCreation_CatchesFileNotFoundException()
         {
             StorageProvider storageProvider = new StorageProvider();
 
@@ -111,9 +111,9 @@ namespace FileWatcherTest
             storageProvider.CreateBlob(filePath, fileName);
         }
 
-        
+
         [TestMethod]
-        public void BlobDelete_FilePathArg_FileNotFoundCatchesException()
+        public void StorageProvider_BlobDelete_FilePathArg_CatchesFileNotFoundException()
         {
             StorageProviderDebug storageProvider = new StorageProviderDebug();
 
@@ -128,7 +128,7 @@ namespace FileWatcherTest
         [ExpectedException(typeof(System.NullReferenceException),
             "Parameter index is out of range.")]
         [TestMethod]
-        public void BlobDelete_NoArgs_FileNotFoundCatchesException()
+        public void StorageProvider_BlobDelete_NoArgs_CatchesNullRefException()
         {
             StorageProviderDebug storageProvider = new StorageProviderDebug();
 
