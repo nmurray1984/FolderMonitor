@@ -27,7 +27,7 @@ namespace ConsoleApplication1
             FolderName = folderName;
             StorageProvider =  storageProvider;
 
-            // Create a new FileSystemWatcher and set its properties.
+            //Create a new FileSystemWatcher and set its properties.
             Watcher = new FileSystemWatcher();
             Watcher.Path = folderName;
 
