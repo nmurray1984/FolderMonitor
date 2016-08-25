@@ -15,7 +15,7 @@ namespace FileWatcherTest
         public string filePath = "C://Users//dylan.parmley//Desktop//FindThis";
 
         [TestMethod]
-        public void WatcherFindsPDF()
+        public void Watcher_Filter_FindsPDF()
         {
 
             FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
@@ -28,7 +28,7 @@ namespace FileWatcherTest
 
         }
         [TestMethod]
-        public void WatcherIgnoresTxt()
+        public void Watcher_Filter_IgnoresTxt()
         {
             FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
             folderMonitor.Observe();
@@ -44,8 +44,6 @@ namespace FileWatcherTest
         {
 
             StorageProvider storageProvider = new StorageProvider();
-
-            //ensure our test file doesnt already exist in the cloud
 
             //verify the file does not exist in the cloud already
 

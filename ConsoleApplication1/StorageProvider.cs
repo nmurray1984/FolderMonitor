@@ -33,6 +33,7 @@ namespace ConsoleApplication1
             BlobContainer.CreateIfNotExists();
         }
 
+        //naming conventions? 
         public void CreateBlob(string filePath, string fileName)
         {
             string fullFilePath = System.IO.Path.Combine(filePath, fileName);
@@ -49,6 +50,7 @@ namespace ConsoleApplication1
             else
             {
                 //file already exists on cloud
+                //throw (new Exception("File: "+fileName +" already exists in the container: "+BlobContainer.Name));
             }
 
         }
@@ -68,6 +70,7 @@ namespace ConsoleApplication1
             else
             {
                 //file dne
+                //throw (new Exception("File: " + fileName + " does not exist in the directory " + BlobContainer.Uri));
             }
 
 

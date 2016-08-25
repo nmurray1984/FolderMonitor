@@ -13,7 +13,7 @@ namespace ConsoleApplication1
             FolderMonitor folderMonitor = new FolderMonitor("C://Users//dylan.parmley//Desktop//FindThis", new StorageProvider());
             //folderMonitor.StorageProvider.PrintBlobFolder();
 
-            folderMonitor.StorageProvider.DeleteBlob("unitTestFile");
+            //folderMonitor.StorageProvider.DeleteBlob("unitTestFile");
             //folderMonitor.StorageProvider.PrintBlobFolder();
             //folderMonitor.Observe();
 
