@@ -30,6 +30,7 @@ namespace ConsoleApplication1
             BlobClient = StorageAccount.CreateCloudBlobClient();
             //TODO: Change to appropriate container name
             BlobContainer = BlobClient.GetContainerReference("mycontainer");
+            //BlobContainer = BlobClient.GetContainerReference("pdflobs");
             BlobContainer.CreateIfNotExists();
         }
 

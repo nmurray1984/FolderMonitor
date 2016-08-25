@@ -15,8 +15,54 @@ namespace ConsoleApplication1
 
             //folderMonitor.StorageProvider.DeleteBlob("unitTestFile");
             //folderMonitor.StorageProvider.PrintBlobFolder();
-            //folderMonitor.Observe();
+            folderMonitor.Observe();
 
+            //folderMonitor.StorageProvider.
+            //createTestFile(".pdf");
+            //deleteTestFile(".pdf");
+
+
+        }
+
+        public static void createTestFile(string fileType)
+        {
+            string pathString = "C://Users//dylan.parmley//Desktop//FindThis";
+            string fileName = "unitTestFile" + fileType;
+
+            pathString = System.IO.Path.Combine(pathString, fileName);
+
+
+            if (!System.IO.File.Exists(pathString))
+            {
+                using (System.IO.FileStream fs = System.IO.File.Create(pathString))
+                {
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("File \"{0}\" already exists.", fileName);
+                return;
+            }
+
+        }
+
+        public static void deleteTestFile(string fileType)
+        {
+            string pathString = "C://Users//dylan.parmley//Desktop//FindThis";
+            string fileName = "unitTestFile" + fileType;
+            pathString = System.IO.Path.Combine(pathString, fileName);
+
+
+            System.IO.FileInfo fi = new System.IO.FileInfo(pathString);
+            try
+            {
+                fi.Delete();
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Linq;
+using Moq;
 
 namespace FileWatcherTest
 {
@@ -15,10 +16,26 @@ namespace FileWatcherTest
         public string filePath = "C://Users//dylan.parmley//Desktop//FindThis";
 
         [TestMethod]
+        public void MOQ_Watcher_Filter_FindsPDF()
+        {
+            Mock<IStorageProvider> mockStorageProvider = new Mock<IStorageProvider>();
+            
+            FolderMonitor folderMonitor = new FolderMonitor(filePath, mockStorageProvider.Object);
+            folderMonitor.Observe();
+
+            createTestFile(".pdf");
+            deleteTestFile(".pdf");
+
+            mockStorageProvider.Verify(t => t.CreateBlob(filePath, "unitTestFile.pdf"));
+            //Assert.IsTrue(folderMonitor.Running);
+
+        }
+
+        [TestMethod]
         public void Watcher_Filter_FindsPDF()
         {
 
-            FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
+            FolderMonitorDebug folderMonitor = new FolderMonitorDebug(filePath, new StorageProvider());
             folderMonitor.Observe();
 
             createTestFile(".pdf");
@@ -27,15 +44,32 @@ namespace FileWatcherTest
             Assert.IsTrue(folderMonitor.Running);
 
         }
+
         [TestMethod]
-        public void Watcher_Filter_IgnoresTxt()
+        public void MOQ_Watcher_Filter_IgnoresTxt()
         {
-            FolderMonitorDebug folderMonitor = new FolderMonitorDebug("C://Users//dylan.parmley//Desktop//FindThis", new StorageProviderDebug());
+            Mock<IStorageProvider> mockStorageProvider = new Mock<IStorageProvider>();
+            FolderMonitor folderMonitor = new FolderMonitor(filePath, mockStorageProvider.Object);
             folderMonitor.Observe();
 
             createTestFile(".txt");
             deleteTestFile(".txt");
 
+            mockStorageProvider.Verify(t => t.CreateBlob(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
+            //Assert.IsFalse(folderMonitor.Running);
+        }
+
+        [TestMethod]
+        public void Watcher_Filter_IgnoresTxt()
+        {
+            Mock<IStorageProvider> mockStorageProvider = new Mock<IStorageProvider>();
+            FolderMonitorDebug folderMonitor = new FolderMonitorDebug(filePath, new StorageProviderDebug());
+            folderMonitor.Observe();
+
+            createTestFile(".txt");
+            deleteTestFile(".txt");
+
+            
             Assert.IsFalse(folderMonitor.Running);
         }
 
@@ -140,7 +174,7 @@ namespace FileWatcherTest
 
         public void createTestFile(string fileType)
         {
-            string pathString = "C://Users//dylan.parmley//Desktop//FindThis";
+            string pathString = filePath;
             string fileName = "unitTestFile" + fileType;
 
             pathString = System.IO.Path.Combine(pathString, fileName);
@@ -163,7 +197,7 @@ namespace FileWatcherTest
 
         public void deleteTestFile(string fileType)
         {
-            string pathString = "C://Users//dylan.parmley//Desktop//FindThis";
+            string pathString = filePath;
             string fileName = "unitTestFile" + fileType;
             pathString = System.IO.Path.Combine(pathString, fileName);
 

@@ -46,6 +46,9 @@ namespace ConsoleApplication1
         {
             // Begin watching.
             Watcher.EnableRaisingEvents = true;
+
+            //Console.WriteLine("Press \'q\' to quit the sample.");
+            //while (Console.Read() != 'q') ;
         }
 
 
